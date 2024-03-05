@@ -4,7 +4,7 @@ namespace Models;
 
 
 
-class Article extends Model
+class Articles extends Model
 {
     protected  $table = 'articles';
 
