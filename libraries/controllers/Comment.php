@@ -1,6 +1,8 @@
 <?php
 namespace Controllers;
-      require_once('libraries/utils.php');
+
+use Http;
+      
      
       
 
@@ -31,7 +33,7 @@ namespace Controllers;
                    die("Aucun commentaire n'a l'identifiant $article_id !");
                }
                $this->model->insert($author, $content, $article_id);
-               redirect("article.php?id=" . $article_id);
+               Http::redirect("index.php?controller=article&task=show&id=" . $article_id);
             }
 
 
@@ -49,6 +51,6 @@ namespace Controllers;
                 }
                 $article_id = $commentaire['article_id'];
                 $this->model->delete($id);
-                redirect("article.php?id=" . $article_id);
+                Http::redirect("index.php?controller=article&task=delete&id=" . $article_id);
             }
       }

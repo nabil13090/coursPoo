@@ -1,9 +1,8 @@
 <?php
 
 namespace Models;
-require_once('libraries/database.php');
 
-
+use Database;
 
 abstract class Model
 {
@@ -13,7 +12,7 @@ abstract class Model
 
     public function __construct()
     {
-        $this-> pdo = getPdo();
+        $this-> pdo = Database::getPdo();
     }
 
 
@@ -44,7 +43,7 @@ abstract class Model
     }
 
     public function delete(int $id) : void {
-        $pdo = getPdo();
+        $pdo = Database::getPdo();
         $query = $pdo->prepare("DELETE FROM {$this->table} WHERE id = :id");
         $query->execute(['id' => $id]);
     

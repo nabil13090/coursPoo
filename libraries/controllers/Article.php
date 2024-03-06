@@ -1,6 +1,8 @@
 <?php
 namespace Controllers;
-      require_once('libraries/utils.php');
+
+use Http;
+use Renderer;
    
 
 class Article extends Controller
@@ -11,7 +13,7 @@ class Article extends Controller
   
         $articles = $this->model->findAll("created_at DESC");
         $pageTitle = "Accueil";
-        render('articles/index', compact('pageTitle','articles'));
+        Renderer::render('articles/index', compact('pageTitle','articles'));
     }
 
     public function show(){
@@ -27,7 +29,7 @@ class Article extends Controller
         $article = $this->model->find($article_id);
         $commentaires = $commentModel->findAllWithArticle($article_id);
         $pageTitle = $article['title'];
-        render('articles/show', compact('pageTitle', 'article', 'commentaires', 'article_id'));
+        Renderer::render('articles/show', compact('pageTitle', 'article', 'commentaires', 'article_id'));
 
     }
     public function delete(){
@@ -41,6 +43,6 @@ class Article extends Controller
             die("L'article $id n'existe pas, vous ne pouvez donc pas le supprimer !");
         }
         $this->model->delete($id);
-        redirect('index.php');
+        Http::redirect('index.php');
     }
 }
